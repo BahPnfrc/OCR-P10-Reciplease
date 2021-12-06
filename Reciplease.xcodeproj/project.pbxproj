@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		40DB193F25555CD9F9BA3B0A /* Pods_Reciplease.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32C618768A3750F2C1C186A3 /* Pods_Reciplease.framework */; };
 		52DEEA4C275D3DD400548415 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DEEA4B275D3DD400548415 /* AppDelegate.swift */; };
 		52DEEA4E275D3DD400548415 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DEEA4D275D3DD400548415 /* SceneDelegate.swift */; };
 		52DEEA50275D3DD400548415 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DEEA4F275D3DD400548415 /* ViewController.swift */; };
@@ -17,6 +18,8 @@
 		52DEEA66275D3DD500548415 /* RecipleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DEEA65275D3DD500548415 /* RecipleaseTests.swift */; };
 		52DEEA70275D3DD500548415 /* RecipleaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DEEA6F275D3DD500548415 /* RecipleaseUITests.swift */; };
 		52DEEA72275D3DD500548415 /* RecipleaseUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DEEA71275D3DD500548415 /* RecipleaseUITestsLaunchTests.swift */; };
+		52DEEA83275D4AA200548415 /* RecipeJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DEEA82275D4AA200548415 /* RecipeJson.swift */; };
+		52DEEA85275E1CB000548415 /* MainUITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DEEA84275E1CB000548415 /* MainUITabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		32C618768A3750F2C1C186A3 /* Pods_Reciplease.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reciplease.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52DEEA48275D3DD400548415 /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52DEEA4B275D3DD400548415 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52DEEA4D275D3DD400548415 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +55,11 @@
 		52DEEA6B275D3DD500548415 /* RecipleaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipleaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		52DEEA6F275D3DD500548415 /* RecipleaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseUITests.swift; sourceTree = "<group>"; };
 		52DEEA71275D3DD500548415 /* RecipleaseUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		52DEEA81275D49B100548415 /* Recipe.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Recipe.json; sourceTree = "<group>"; };
+		52DEEA82275D4AA200548415 /* RecipeJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeJson.swift; sourceTree = "<group>"; };
+		52DEEA84275E1CB000548415 /* MainUITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUITabBarController.swift; sourceTree = "<group>"; };
+		6BEFB068AFAAA4E5FD3C472C /* Pods-Reciplease.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease.debug.xcconfig"; path = "Target Support Files/Pods-Reciplease/Pods-Reciplease.debug.xcconfig"; sourceTree = "<group>"; };
+		D98169024F7753DDE40D614C /* Pods-Reciplease.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease.release.xcconfig"; path = "Target Support Files/Pods-Reciplease/Pods-Reciplease.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40DB193F25555CD9F9BA3B0A /* Pods_Reciplease.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +95,8 @@
 				52DEEA64275D3DD500548415 /* RecipleaseTests */,
 				52DEEA6E275D3DD500548415 /* RecipleaseUITests */,
 				52DEEA49275D3DD400548415 /* Products */,
+				E64448A4550FB2BA4D93C195 /* Pods */,
+				97DEBFE891222A0E24E56A2F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,14 +113,12 @@
 		52DEEA4A275D3DD400548415 /* Reciplease */ = {
 			isa = PBXGroup;
 			children = (
-				52DEEA4B275D3DD400548415 /* AppDelegate.swift */,
-				52DEEA4D275D3DD400548415 /* SceneDelegate.swift */,
-				52DEEA4F275D3DD400548415 /* ViewController.swift */,
-				52DEEA51275D3DD400548415 /* Main.storyboard */,
 				52DEEA57275D3DD500548415 /* Assets.xcassets */,
-				52DEEA59275D3DD500548415 /* LaunchScreen.storyboard */,
 				52DEEA5C275D3DD500548415 /* Info.plist */,
 				52DEEA54275D3DD400548415 /* Reciplease.xcdatamodeld */,
+				52DEEA7E275D422200548415 /* Model */,
+				52DEEA7F275D422F00548415 /* View */,
+				52DEEA80275D423800548415 /* Controller */,
 			);
 			path = Reciplease;
 			sourceTree = "<group>";
@@ -130,6 +140,53 @@
 			path = RecipleaseUITests;
 			sourceTree = "<group>";
 		};
+		52DEEA7E275D422200548415 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				52DEEA81275D49B100548415 /* Recipe.json */,
+				52DEEA82275D4AA200548415 /* RecipeJson.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		52DEEA7F275D422F00548415 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				52DEEA59275D3DD500548415 /* LaunchScreen.storyboard */,
+				52DEEA51275D3DD400548415 /* Main.storyboard */,
+				52DEEA4F275D3DD400548415 /* ViewController.swift */,
+				52DEEA84275E1CB000548415 /* MainUITabBarController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		52DEEA80275D423800548415 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				52DEEA4B275D3DD400548415 /* AppDelegate.swift */,
+				52DEEA4D275D3DD400548415 /* SceneDelegate.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		97DEBFE891222A0E24E56A2F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				32C618768A3750F2C1C186A3 /* Pods_Reciplease.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E64448A4550FB2BA4D93C195 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6BEFB068AFAAA4E5FD3C472C /* Pods-Reciplease.debug.xcconfig */,
+				D98169024F7753DDE40D614C /* Pods-Reciplease.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -137,9 +194,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 52DEEA75275D3DD500548415 /* Build configuration list for PBXNativeTarget "Reciplease" */;
 			buildPhases = (
+				492298EE884AAE89590C79EA /* [CP] Check Pods Manifest.lock */,
 				52DEEA44275D3DD400548415 /* Sources */,
 				52DEEA45275D3DD400548415 /* Frameworks */,
 				52DEEA46275D3DD400548415 /* Resources */,
+				9CC0B402F112A5637C7AC5B6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -256,14 +315,58 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		492298EE884AAE89590C79EA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Reciplease-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9CC0B402F112A5637C7AC5B6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Reciplease/Pods-Reciplease-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Reciplease/Pods-Reciplease-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Reciplease/Pods-Reciplease-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		52DEEA44275D3DD400548415 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52DEEA85275E1CB000548415 /* MainUITabBarController.swift in Sources */,
 				52DEEA56275D3DD400548415 /* Reciplease.xcdatamodeld in Sources */,
 				52DEEA50275D3DD400548415 /* ViewController.swift in Sources */,
 				52DEEA4C275D3DD400548415 /* AppDelegate.swift in Sources */,
+				52DEEA83275D4AA200548415 /* RecipeJson.swift in Sources */,
 				52DEEA4E275D3DD400548415 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -438,6 +541,7 @@
 		};
 		52DEEA76275D3DD500548415 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6BEFB068AFAAA4E5FD3C472C /* Pods-Reciplease.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -446,6 +550,7 @@
 				DEVELOPMENT_TEAM = B3ALNAM59J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Reciplease/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Reciplease;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -460,12 +565,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		52DEEA77275D3DD500548415 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D98169024F7753DDE40D614C /* Pods-Reciplease.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -474,6 +580,7 @@
 				DEVELOPMENT_TEAM = B3ALNAM59J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Reciplease/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Reciplease;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -488,7 +595,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
