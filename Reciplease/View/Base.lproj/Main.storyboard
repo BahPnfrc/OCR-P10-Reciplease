@@ -27,14 +27,30 @@
         <!--Item 1-->
         <scene sceneID="ZZW-tN-6Fr">
             <objects>
-                <viewController id="Ak3-t5-20P" sceneMemberID="viewController">
+                <viewController id="Ak3-t5-20P" customClass="TestViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vUQ-re-RJb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TAT-7k-28M">
+                                <rect key="frame" x="30" y="74" width="354" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="BMO-xb-5lX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="BMO-xb-5lX" firstAttribute="trailing" secondItem="TAT-7k-28M" secondAttribute="trailing" constant="30" id="5Ve-Uf-YP7"/>
+                            <constraint firstItem="TAT-7k-28M" firstAttribute="top" secondItem="BMO-xb-5lX" secondAttribute="top" constant="30" id="SBg-JU-zI9"/>
+                            <constraint firstItem="TAT-7k-28M" firstAttribute="leading" secondItem="BMO-xb-5lX" secondAttribute="leading" constant="30" id="kRC-wp-3Tr"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="XBf-v3-PgO"/>
+                    <connections>
+                        <outlet property="contentLabel" destination="TAT-7k-28M" id="qzb-g0-SUp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nlf-qy-pcV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
