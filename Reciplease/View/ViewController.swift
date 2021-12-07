@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  Reciplease
-//
-//  Created by Genapi on 05/12/2021.
-//
-
 import UIKit
 
 class ViewController: UIViewController {

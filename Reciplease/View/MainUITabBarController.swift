@@ -1,10 +1,3 @@
-//
-//  MainUITabBarController.swift
-//  Reciplease
-//
-//  Created by Genapi on 06/12/2021.
-//
-
 import UIKit
 
 class MainUITabBarController: UITabBarController {

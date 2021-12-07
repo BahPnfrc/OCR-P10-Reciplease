@@ -1,9 +1,9 @@
 import Foundation
 import Alamofire
 
-class RecipeService {
+class NetworkController {
 
-    static let shared = RecipeService()
+    static let shared = NetworkController()
     private init() {}
 
     // MARK: - Parameters
@@ -40,7 +40,7 @@ class RecipeService {
         /// - parameter ingredients: an array of ingredients
         /// - returns :
         madeWith ingredients: [String],
-        completion: @escaping (Swift.Result<RecipeResult, ApiError>) -> Void) {
+        completion: @escaping (Swift.Result<RecipeData, ApiError>) -> Void) {
 
             guard var urlComponents = URLComponents(string: baseURL) else {
                 completion(.failure(.url))
@@ -68,7 +68,7 @@ class RecipeService {
                     print(error)
                 case .success(let string):
                     guard let data = string.data(using: .utf8),
-                        let recipes = try? JSONDecoder().decode(RecipeResult.self, from: data) else {
+                        let recipes = try? JSONDecoder().decode(RecipeData.self, from: data) else {
                         completion(.failure(.decoding))
                         return
                     }

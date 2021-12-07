@@ -1,10 +1,3 @@
-//
-//  TestViewController.swift
-//  Reciplease
-//
-//  Created by Genapi on 06/12/2021.
-//
-
 import UIKit
 import Alamofire
 
@@ -16,7 +9,7 @@ class TestViewController: UIViewController {
         super.viewDidLoad()
 
         let x = ["chicken","okra"]
-        RecipeService.getRecipes(madeWith: x) { result in
+        NetworkController.getRecipes(madeWith: x) { result in
             print(result)
         }
     }

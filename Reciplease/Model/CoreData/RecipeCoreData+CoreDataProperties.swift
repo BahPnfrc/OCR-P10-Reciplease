@@ -1,19 +1,10 @@
-//
-//  RecipeFavorite+CoreDataProperties.swift
-//  Reciplease
-//
-//  Created by Genapi on 07/12/2021.
-//
-//
-
 import Foundation
 import CoreData
 
+extension RecipeCoreData {
 
-extension RecipeFavorite {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<RecipeFavorite> {
-        return NSFetchRequest<RecipeFavorite>(entityName: "RecipeFavorite")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<RecipeCoreData> {
+        return NSFetchRequest<RecipeCoreData>(entityName: "RecipeCoreData")
     }
 
     @NSManaged public var image: String?
@@ -26,6 +17,6 @@ extension RecipeFavorite {
 
 }
 
-extension RecipeFavorite : Identifiable {
+extension RecipeCoreData : Identifiable {
 
 }

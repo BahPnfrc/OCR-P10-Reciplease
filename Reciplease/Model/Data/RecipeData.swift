@@ -1,14 +1,11 @@
-//   let reciplease = try? newJSONDecoder().decode(Reciplease.self, from: jsonData)
-
 import Foundation
-import CoreData
 
 // MARK: - Recipe Data
-struct RecipeResult: Decodable {
+struct RecipeData: Decodable {
     let hits: [Hit]?
 }
 
-// MARK: - Recipe Data
+// MARK: - Hit
 struct Hit: Decodable {
     let recipe: Recipe?
 }
