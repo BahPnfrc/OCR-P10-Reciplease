@@ -11,15 +11,15 @@ class RecipeService {
     /// More : https://developer.edamam.com/edamam-docs-recipe-api
     private static let baseURL = "https://api.edamam.com/api/recipes/v2"
 
+    /// Pass this items's raw values to build a valid URL
     private enum UrlQueryItems: String {
-        /// Pass this items's raw values to build a valid URL
         case type
         case input = "q"
         case idToken = "app_id"
         case keyToken = "app_key"
 
+        /// Pass this values as default values for items
         var defaultValue: String? {
-            /// Pass this values as default values for items
             switch self {
             case .type: return "public"
             case .input: return nil
