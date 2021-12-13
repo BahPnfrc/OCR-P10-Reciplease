@@ -3,13 +3,12 @@ import CoreData
 
 class CoreDataController {
 
-    private let context: NSManagedObjectContext
+    static let shared = CoreDataController()
+    private init() {}
 
-    init(context: NSManagedObjectContext) {
-        self.context = context
-    }
+    private let context = AppDelegate.viewContext
 
-    func saveContext() throws -> Void {
+    private func saveContext() throws -> Void {
         if context.hasChanges {
             do {
                 try context.save()
@@ -22,21 +21,21 @@ class CoreDataController {
 
 extension CoreDataController {
 
-    func add(_ recipe: RecipeFavorite) {
+    func add(_ recipe: Recipe) throws -> Void {
         let newRecipe = RecipeFavorite(context: context)
         newRecipe.image             = recipe.image
         newRecipe.ingredientLines   = recipe.ingredientLines
         newRecipe.label             = recipe.label
         newRecipe.timestamp         = Date()
-        newRecipe.totalTime         = recipe.totalTime
+        newRecipe.totalTime         = recipe.totalTime ?? 1
         newRecipe.url               = recipe.url
-        newRecipe.yield             = recipe.yield
+        newRecipe.yield             = recipe.yield ?? 0
         try? saveContext()
     }
 
     func get(
         recipeNamed name: String = "",
-        ascending: Bool = false) throws -> [RecipeFavorite] {
+        ascending: Bool = false) throws -> [Recipe] {
             let request = RecipeFavorite.fetchRequest()
             if name.count > 0 {
                 request.predicate = NSPredicate(format: "label CONTAINS[cd] %@", name)
@@ -44,17 +43,14 @@ extension CoreDataController {
             request.sortDescriptors = [
                 NSSortDescriptor(key: "timestamp", ascending: ascending)
             ]
-            var result = [RecipeFavorite]()
             do {
-                let fetchResults = try context.fetch(request)
-                for fetchResult in fetchResults { result.append(fetchResult) }
-                return result
+                return try context.fetch(request).map( {$0.toRecipe() })
             } catch {
                 throw error
             }
         }
 
-    func alreadyExist(_ recipe: RecipeFavorite) -> Bool {
+    func isFavorite(_ recipe: Recipe) -> Bool {
         guard let url = recipe.url else { return false }
         let request = RecipeFavorite.fetchRequest()
         request.predicate = NSPredicate(format: "url == %@", "\(url)")
@@ -62,7 +58,7 @@ extension CoreDataController {
         return !recipes.isEmpty
     }
 
-    func delete(_ recipe: RecipeFavorite) throws -> Void {
+    func delete(_ recipe: Recipe) throws -> Void {
         let request = RecipeFavorite.fetchRequest()
         if let url = recipe.url {
             request.predicate = NSPredicate(format: "url = %@", "\(url)")
@@ -75,5 +71,4 @@ extension CoreDataController {
             }
         }
     }
-
 }

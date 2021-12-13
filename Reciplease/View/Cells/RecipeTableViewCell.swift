@@ -1,16 +1,8 @@
-//
-//  RecipeTableViewCell.swift
-//  Reciplease
-//
-//  Created by Genapi on 09/12/2021.
-//
-
 import UIKit
 
 class RecipeTableViewCell: UITableViewCell {
 
     @IBOutlet weak var backgroundImageView: UIImageView!
-
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var ingredientsLabel: UILabel!
 
@@ -19,8 +11,8 @@ class RecipeTableViewCell: UITableViewCell {
     @IBOutlet weak var markLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
 
-    @IBOutlet weak var markImageView: UIImageView!
-    @IBOutlet weak var timerImageView: UIImageView!
+    @IBOutlet weak var yieldImageView: UIImageView!
+    @IBOutlet weak var totalTimeImageView: UIImageView!
 
     lazy var gradient: CAGradientLayer = {
         let gradient = CAGradientLayer()
@@ -37,22 +29,16 @@ class RecipeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        gradient.frame = contentView.bounds
-        contentView.layer.addSublayer(gradient)
+//        gradient.frame = contentView.bounds
+//        contentView.layer.addSublayer(gradient)
 
-        markImageView.image = paintedSystemImage(named: "hand.thumbsup")
-        timerImageView.image = paintedSystemImage(named: "timer")
+        yieldImageView.image = Shared.yieldImage
+        totalTimeImageView.image = Shared.totalTimeImage
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
-    }
-
-    func paintedSystemImage(named systemName: String) -> UIImage? {
-        let config = UIImage.SymbolConfiguration(paletteColors: [.black, .black, .black])
-        let image = UIImage(systemName: systemName)
-        return image?.applyingSymbolConfiguration(config)
     }
 
 }

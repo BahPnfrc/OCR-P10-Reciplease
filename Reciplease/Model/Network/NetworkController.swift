@@ -9,7 +9,7 @@ class NetworkController {
     // MARK: - Parameters
 
     /// More : https://developer.edamam.com/edamam-docs-recipe-api
-    private static let baseURL = "https://api.edamam.com/api/recipes/v2"
+    private let baseURL = "https://api.edamam.com/api/recipes/v2"
 
     /// Pass this items's raw values to build a valid URL
     private enum UrlQueryItems: String {
@@ -36,11 +36,11 @@ class NetworkController {
         let app_key: String
     }
 
-    static func getRecipes(
+    func getRecipes(
         /// - parameter ingredients: an array of ingredients
         /// - returns :
         madeWith ingredients: [String],
-        completion: @escaping (Swift.Result<RecipeData, ApiError>) -> Void) {
+        completion: @escaping (Swift.Result<[Recipe], ApiError>) -> Void) {
 
             guard var urlComponents = URLComponents(string: baseURL) else {
                 completion(.failure(.url))
@@ -68,24 +68,30 @@ class NetworkController {
                     print(error)
                 case .success(let string):
                     guard let data = string.data(using: .utf8),
-                        let recipes = try? JSONDecoder().decode(RecipeData.self, from: data) else {
-                        completion(.failure(.decoding))
-                        return
+                          let recipeData = try? JSONDecoder().decode(RecipeData.self, from: data) else {
+                              completion(.failure(.decoding))
+                              return
+                          }
+                    var recipes = [Recipe]()
+                    if let hits = recipeData.hits {
+                        for hit in hits {
+                            if let recipe = hit.recipe { recipes.append(recipe)}
+                        }
                     }
                     completion(.success(recipes))
                 }
             }
         }
 
-    private static func getResponse(
+    private func getResponse(
         fromRequest request:URLRequest,
         completion: @escaping (Swift.Result<String, ApiError>) -> Void) {
             Alamofire.request(request.description).responseString { response in
-                        if let JSON = response.result.value {
-                            completion(.success(JSON))
-                        }
+                if let JSON = response.result.value {
+                    completion(.success(JSON))
+                }
                 completion(.failure(.server))
-                    }
+            }
         }
 
 }

@@ -1,6 +1,6 @@
 import UIKit
 
-class IngredientTableViewCell: UITableViewCell {
+class SearchIngredientTableViewCell: UITableViewCell {
 
     @IBOutlet weak var leadingLabel: UILabel!
     @IBOutlet weak var ingredientLabel: UILabel!
