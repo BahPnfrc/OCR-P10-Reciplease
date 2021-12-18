@@ -2,28 +2,55 @@ import UIKit
 
 class SearchViewController: UIViewController {
 
-    @IBOutlet weak var ingredientsTextField: UITextField!
+    @IBOutlet weak var ingredientsSearchBar: UISearchBar!
     @IBOutlet weak var ingredientsTableView: UITableView!
+    @IBOutlet weak var ingredientsView: UIView!
+    @IBOutlet weak var ingredientsLabel: UILabel!
+
+    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var clearButton: UIButton!
+    @IBOutlet weak var searchButton: UIButton!
 
     var datasource = [String]()
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.barTintColor = Painting.colorBrown
-        navigationController?.navigationBar.tintColor = Painting.colorWhite
+        ingredientsSearchBar.delegate = self
+        ingredientsTableView.delegate = self
+        ingredientsTableView.dataSource = self
+        paint()
+    }
+
+    private func paint() {
+        // navigation
+        if let nc = navigationController {
+            nc.navigationBar.backgroundColor = Painting.colorBrown
+            nc.navigationBar.titleTextAttributes = [.foregroundColor: Painting.colorWhite]
+            nc.navigationBar.tintColor = Painting.colorWhite
+        }
+        // Search Bar
+        ingredientsSearchBar.placeholder = "Chicken, Lemon, Cheese..."
+        ingredientsSearchBar.backgroundImage = UIImage()
+        // Button
+        addButton.tintColor = Painting.colorGreen
+        clearButton.tintColor = Painting.colorGrey
+        searchButton.tintColor = Painting.colorGreen
+        // Ingredients
+        ingredientsView.backgroundColor = Painting.colorBrown
+        ingredientsTableView.backgroundColor = Painting.colorBrown
+        ingredientsLabel.textColor = Painting.colorWhite
     }
 
     @IBAction func didTapAddButton(_ sender: Any) {
-        guard let ingredient = ingredientsTextField.text?.trimmingCharacters(in: .whitespaces), ingredient.count > 0 else {
+        guard let ingredient = ingredientsSearchBar.text?.trimmingCharacters(in: .whitespaces), ingredient.count > 0 else {
             return
         }
         let alert = UIAlertController(title: "New ingredient", message: "Shall we add '\(ingredient)' to the recipe ?", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "For sure", style: .default) { _ in
             self.datasource.append(ingredient)
             self.ingredientsTableView.reloadData()
-            self.ingredientsTextField.text = nil
-            self.ingredientsTextField.becomeFirstResponder()
+            self.ingredientsSearchBar.text = nil
+            self.ingredientsSearchBar.becomeFirstResponder()
         })
         alert.addAction(UIAlertAction(title: "Nah", style: .cancel))
         self.present(alert, animated: true, completion: nil)
@@ -44,7 +71,7 @@ class SearchViewController: UIViewController {
 
         #if targetEnvironment(simulator)
         if datasource.count == 0 {
-            guard let fileURL = Bundle.main.url(forResource: "TestRecipeData", withExtension: "json"),
+            guard let fileURL = Bundle.main.url(forResource: "RecipeData", withExtension: "json"),
                   let string = try? String(contentsOf: fileURL),
                   let data = string.data(using: .utf8),
                   let result = try? JSONDecoder().decode(RecipeData.self, from: Data(data)) else {
@@ -95,6 +122,8 @@ class SearchViewController: UIViewController {
     }
 
 }
+
+extension SearchViewController: UISearchBarDelegate {}
 
 extension SearchViewController: UITableViewDelegate {}
 

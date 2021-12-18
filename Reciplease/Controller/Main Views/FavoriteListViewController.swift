@@ -14,6 +14,7 @@ class FavoriteListViewController: RecipesListViewController {
     private func loadFavorite() {
         do {
             dataSource = try CoreDataController.shared.get()
+            tabBarController?.tabBarItem.badgeValue = "\(dataSource.count)"
         } catch {
             let alert = UIAlertController(
                 title: "Reciplease",

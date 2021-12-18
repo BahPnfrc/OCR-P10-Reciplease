@@ -24,7 +24,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zrb-zP-guz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-180" y="-148"/>
+            <point key="canvasLocation" x="-184" y="-64"/>
         </scene>
         <!--Search View-->
         <scene sceneID="ZZW-tN-6Fr">
@@ -44,37 +44,36 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QC5-BF-gaY">
-                                        <rect key="frame" x="274" y="103" width="124" height="31"/>
+                                        <rect key="frame" x="315" y="103" width="83" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Add"/>
                                         <connections>
                                             <action selector="didTapAddButton:" destination="Ak3-t5-20P" eventType="touchUpInside" id="wpL-KA-YuS"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NMh-oV-Mqi">
-                                        <rect key="frame" x="16" y="99" width="242" height="39.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="2eW-tu-Ias">
+                                        <rect key="frame" x="8" y="93" width="299" height="51"/>
                                         <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                    </searchBar>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="QC5-BF-gaY" secondAttribute="trailing" constant="16" id="0rv-6u-o8u"/>
                                     <constraint firstAttribute="height" constant="150" id="2VA-nW-YeV"/>
-                                    <constraint firstItem="QC5-BF-gaY" firstAttribute="width" secondItem="XQ4-L8-CH4" secondAttribute="width" multiplier="0.3" id="4CY-as-GaT"/>
+                                    <constraint firstItem="QC5-BF-gaY" firstAttribute="width" secondItem="XQ4-L8-CH4" secondAttribute="width" multiplier="0.2" id="4CY-as-GaT"/>
+                                    <constraint firstItem="2eW-tu-Ias" firstAttribute="leading" secondItem="XQ4-L8-CH4" secondAttribute="leading" constant="8" id="BXN-G4-d9M"/>
+                                    <constraint firstItem="2eW-tu-Ias" firstAttribute="centerY" secondItem="QC5-BF-gaY" secondAttribute="centerY" id="EdL-oI-4q5"/>
+                                    <constraint firstItem="QC5-BF-gaY" firstAttribute="leading" secondItem="2eW-tu-Ias" secondAttribute="trailing" constant="8" id="KQj-Sy-g17"/>
                                     <constraint firstAttribute="bottom" secondItem="QC5-BF-gaY" secondAttribute="bottom" constant="16" id="Ogq-el-Aj0"/>
-                                    <constraint firstItem="NMh-oV-Mqi" firstAttribute="leading" secondItem="XQ4-L8-CH4" secondAttribute="leading" constant="16" id="Vpf-3b-eC9"/>
                                     <constraint firstItem="bAU-oO-46y" firstAttribute="centerX" secondItem="XQ4-L8-CH4" secondAttribute="centerX" id="i0K-KR-FY3"/>
-                                    <constraint firstItem="NMh-oV-Mqi" firstAttribute="trailing" secondItem="QC5-BF-gaY" secondAttribute="leading" constant="-16" id="jme-yF-VQx"/>
                                     <constraint firstItem="bAU-oO-46y" firstAttribute="top" secondItem="XQ4-L8-CH4" secondAttribute="top" constant="32" id="kdV-cw-WnH"/>
-                                    <constraint firstItem="NMh-oV-Mqi" firstAttribute="centerY" secondItem="QC5-BF-gaY" secondAttribute="centerY" id="w1q-R2-uv3"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bnQ-J1-02N">
                                 <rect key="frame" x="0.0" y="238" width="414" height="575"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xkc-VQ-41Z">
-                                        <rect key="frame" x="274" y="16" width="124" height="31"/>
+                                        <rect key="frame" x="315" y="16" width="83" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Clear"/>
                                         <connections>
@@ -82,7 +81,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your ingredients :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OxM-Yp-OCA">
-                                        <rect key="frame" x="16" y="16.5" width="242" height="30"/>
+                                        <rect key="frame" x="16" y="16.5" width="283" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -181,8 +180,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="Reciplease" id="2vE-Sz-myc"/>
                     <connections>
+                        <outlet property="addButton" destination="QC5-BF-gaY" id="M2Q-9p-ojs"/>
+                        <outlet property="clearButton" destination="xkc-VQ-41Z" id="K5x-VM-ueG"/>
+                        <outlet property="ingredientsLabel" destination="OxM-Yp-OCA" id="DzF-Rt-y9Y"/>
+                        <outlet property="ingredientsSearchBar" destination="2eW-tu-Ias" id="XVn-QO-nbp"/>
                         <outlet property="ingredientsTableView" destination="ZQs-eG-eET" id="3Bh-rf-UHl"/>
-                        <outlet property="ingredientsTextField" destination="NMh-oV-Mqi" id="UtE-L5-gJ8"/>
+                        <outlet property="ingredientsView" destination="bnQ-J1-02N" id="UIc-3G-t6u"/>
+                        <outlet property="searchButton" destination="N4Q-ZE-0Ew" id="tNl-IV-Otk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nlf-qy-pcV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -434,11 +438,11 @@
             </objects>
             <point key="canvasLocation" x="1618.840579710145" y="201.5625"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Item 1-->
         <scene sceneID="4pq-4a-Xk2">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gLR-lh-qvR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" id="XBf-v3-PgO"/>
+                    <tabBarItem key="tabBarItem" title="Item 1" id="XBf-v3-PgO"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="DOv-eC-yMV">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

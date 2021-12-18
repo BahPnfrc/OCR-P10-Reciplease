@@ -7,6 +7,8 @@ class RecipesListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        paint()
         recipesTableView.dataSource = self
         recipesTableView.delegate = self
 
@@ -16,6 +18,15 @@ class RecipesListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         recipesTableView.reloadData()
+    }
+
+    private func paint() {
+        // navigation
+        if let nc = navigationController {
+            nc.navigationBar.backgroundColor = Painting.colorBrown
+            nc.navigationBar.titleTextAttributes = [.foregroundColor: Painting.colorWhite]
+            nc.navigationBar.tintColor = Painting.colorWhite
+        }
     }
 }
 

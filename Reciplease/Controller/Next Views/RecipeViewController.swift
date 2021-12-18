@@ -39,6 +39,8 @@ class RecipeViewController: UIViewController {
             return
         }
 
+        paint()
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: nil, style: .plain, target: self, action: #selector(toggleFavoriteData))
 
         self.toggleFavoriteIcon(to: isFavorite())
@@ -54,6 +56,15 @@ class RecipeViewController: UIViewController {
         dataSource = ingredients
         recipeTableView.reloadData()
 
+    }
+
+    private func paint() {
+        // navigation
+        if let nc = navigationController {
+            nc.navigationBar.backgroundColor = Painting.colorBrown
+            nc.navigationBar.titleTextAttributes = [.foregroundColor: Painting.colorWhite]
+            nc.navigationBar.tintColor = Painting.colorWhite
+        }
     }
 
     @objc private func toggleFavoriteData() {

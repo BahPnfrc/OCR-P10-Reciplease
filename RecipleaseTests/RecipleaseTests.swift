@@ -1,10 +1,3 @@
-//
-//  RecipleaseTests.swift
-//  RecipleaseTests
-//
-//  Created by Genapi on 05/12/2021.
-//
-
 import XCTest
 @testable import Reciplease
 
