@@ -14,26 +14,28 @@ class RecipeTableViewCell: UITableViewCell {
     @IBOutlet weak var yieldImageView: UIImageView!
     @IBOutlet weak var totalTimeImageView: UIImageView!
 
-    lazy var gradient: CAGradientLayer = {
-        let gradient = CAGradientLayer()
-        gradient.type = .radial
-        gradient.colors = [
-            UIColor.red.cgColor,
-            UIColor.purple.cgColor,
-            UIColor.cyan.cgColor
-        ]
-        gradient.locations = [0, 0.25, 1]
-        return gradient
-    }()
-
     override func awakeFromNib() {
         super.awakeFromNib()
 
-//        gradient.frame = contentView.bounds
-//        contentView.layer.addSublayer(gradient)
-
         yieldImageView.image = Shared.yieldImage
         totalTimeImageView.image = Shared.totalTimeImage
+
+        topRightCornerView.layer.cornerRadius = 5
+        topRightCornerView.backgroundColor = Painting.colorBrown
+        topRightCornerView.layer.borderWidth = 1
+        topRightCornerView.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
+        markLabel.textColor = .white
+        timerLabel.textColor = .white
+
+        let gradient = CAGradientLayer()
+        gradient.type = .axial
+        gradient.colors = [
+            UIColor(red: 0, green: 0, blue: 0, alpha: 0),
+            UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+        ]
+        gradient.locations = [0.5, 0.8]
+        gradient.frame = backgroundImageView.bounds
+        backgroundImageView.layer.addSublayer(gradient)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

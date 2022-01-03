@@ -6,8 +6,17 @@ class MainUITabBarController: UITabBarController {
         super.viewDidLoad()
 
         UITabBar.appearance().backgroundColor = Painting.colorBrown
-//        UITabBar.appearance().isTranslucent = false
+        UITabBar.appearance().backgroundImage = UIImage.colorForNavBar(.blue)
+        UITabBar.appearance().shadowImage = UIImage.colorForNavBar(Painting.colorBrown)
 
+        // set red as selected background color
+        let numberOfItems = CGFloat(tabBar.items!.count)
+        let tabBarItemSize = CGSize(width: tabBar.frame.width / numberOfItems, height: tabBar.frame.height)
+        tabBar.selectionIndicatorImage = UIImage.imageWithColor(color: Painting.colorBrown, size: tabBarItemSize).resizableImage(withCapInsets: UIEdgeInsets.zero)
+
+        // remove default border
+        tabBar.frame.size.width = self.view.frame.width + 4
+        tabBar.frame.origin.x = -2
 
         let tabBarItems = tabBar.items! as [UITabBarItem]
 
@@ -25,7 +34,7 @@ class MainUITabBarController: UITabBarController {
         UITabBarItem.appearance().setTitleTextAttributes(
             [.foregroundColor: UIColor.blue],
             for: .selected)
-
         UITabBarItem.appearance().titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -10)
+
     }
 }

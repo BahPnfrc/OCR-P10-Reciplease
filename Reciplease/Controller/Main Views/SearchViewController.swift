@@ -27,6 +27,7 @@ class SearchViewController: UIViewController {
             nc.navigationBar.backgroundColor = Painting.colorBrown
             nc.navigationBar.titleTextAttributes = [.foregroundColor: Painting.colorWhite]
             nc.navigationBar.tintColor = Painting.colorWhite
+
         }
         // Search Bar
         ingredientsSearchBar.placeholder = "Chicken, Lemon, Cheese..."

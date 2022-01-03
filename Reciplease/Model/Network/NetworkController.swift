@@ -94,6 +94,24 @@ class NetworkController {
             }
         }
 
+    func getPicture(
+        fromURL url: String?,
+        completion: @escaping(Swift.Result<UIImage, ApiError>) -> Void) {
+
+            guard let url = url else { return }
+
+            Alamofire.request(url).response { (result) in
+                guard result.error == nil, let data = result.data else {
+                    completion(.failure(.server))
+                    return
+                }
+                guard let image = UIImage(data: data, scale: 1) else {
+                    completion(.failure(.decoding))
+                    return
+                }
+                completion(.success(image))
+            }
+    }
 }
 
 
