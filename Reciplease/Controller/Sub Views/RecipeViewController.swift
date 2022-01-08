@@ -9,12 +9,12 @@ class RecipeViewController: UIViewController {
 
     @IBOutlet weak var topRightCornerView: UIView!
     @IBOutlet weak var yieldLabel: UILabel!
-    @IBOutlet weak var totalTimeLabel: UILabel!
+    @IBOutlet weak var timerLabel: UILabel!
 
     @IBOutlet weak var yieldImageView: UIImageView!
     @IBOutlet weak var totalTimeImageView: UIImageView!
 
-    @IBOutlet weak var unknownButton: UIButton!
+    @IBOutlet weak var openButton: UIButton!
 
     var dataSource = [String]()
     var currentRecipe: Recipe?
@@ -46,9 +46,26 @@ class RecipeViewController: UIViewController {
         self.toggleFavoriteIcon(to: isFavorite())
 
         self.recipeLabel.text = recipe.label
+        self.yieldLabel.text = recipe.getScore()
+        self.timerLabel.text = recipe.getTime()
 
-        self.yieldLabel.text = String(recipe.yield ?? 0)
-        self.totalTimeLabel.text = String(recipe.totalTime ?? 0)
+        RecipeSession.shared.getPicture(fromURL: recipe.image) { result in
+            switch result {
+            case .failure:
+                self.recipeImage.image = UIImage()
+            case .success(let image):
+                self.recipeImage.image = image
+            }
+        }
+
+        let gradient = CAGradientLayer()
+        gradient.colors = [
+            UIColor.clear.cgColor,
+            UIColor.black.withAlphaComponent(1).cgColor
+        ]
+        gradient.locations = [0.3, 1.0]
+        gradient.frame = recipeImage.bounds
+        recipeImage.layer.addSublayer(gradient)
 
         yieldImageView.image = Shared.yieldImage
         totalTimeImageView.image = Shared.totalTimeImage
@@ -65,6 +82,26 @@ class RecipeViewController: UIViewController {
             nc.navigationBar.titleTextAttributes = [.foregroundColor: Painting.colorWhite]
             nc.navigationBar.tintColor = Painting.colorWhite
         }
+
+        recipeLabel.textColor = Painting.colorWhite
+        topRightCornerView.layer.cornerRadius = 5
+        topRightCornerView.backgroundColor = Painting.colorBrown
+        topRightCornerView.layer.borderWidth = 1
+        topRightCornerView.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
+        yieldLabel.textColor = .white
+        timerLabel.textColor = .white
+
+        openButton.tintColor = Painting.colorGreen
+        openButton.setTitle("Get directions", for: .normal)
+        openButton.setTitleColor(Painting.colorWhite, for: .normal)
+        openButton.layer.cornerRadius = 5
+    }
+
+    @IBAction func openButton(_ sender: Any) {
+        guard let url = currentRecipe?.url, let website = URL(string: url) else {
+            return
+        }
+        UIApplication.shared.open(website)
     }
 
     @objc private func toggleFavoriteData() {

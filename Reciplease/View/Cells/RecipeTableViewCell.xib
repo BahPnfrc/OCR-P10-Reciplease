@@ -19,7 +19,7 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XCP-3F-Id1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="146"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="XCP-3F-Id1" secondAttribute="height" multiplier="207:73" id="22c-aV-n0l"/>
+                            <constraint firstAttribute="height" constant="146" id="9oP-39-IlG"/>
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Edx-5K-h4r">
@@ -79,13 +79,13 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUe-Gr-nzm">
-                        <rect key="frame" x="20" y="119" width="284" height="17"/>
+                        <rect key="frame" x="20" y="124" width="374" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m9t-js-BM8">
-                        <rect key="frame" x="20" y="83" width="284" height="24"/>
+                        <rect key="frame" x="20" y="95" width="374" height="24"/>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -93,14 +93,14 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="XCP-3F-Id1" firstAttribute="leading" secondItem="edg-Gt-WFt" secondAttribute="leading" id="3uQ-mK-gJa"/>
-                    <constraint firstItem="m9t-js-BM8" firstAttribute="top" secondItem="Edx-5K-h4r" secondAttribute="bottom" constant="15" id="7gL-VE-Pcw"/>
+                    <constraint firstItem="m9t-js-BM8" firstAttribute="trailing" secondItem="Edx-5K-h4r" secondAttribute="trailing" id="AXA-44-btj"/>
                     <constraint firstAttribute="trailing" secondItem="XCP-3F-Id1" secondAttribute="trailing" id="CYx-oU-aIN"/>
-                    <constraint firstItem="Edx-5K-h4r" firstAttribute="leading" secondItem="m9t-js-BM8" secondAttribute="trailing" constant="10" id="Isj-Vo-bb2"/>
-                    <constraint firstItem="PUe-Gr-nzm" firstAttribute="width" secondItem="m9t-js-BM8" secondAttribute="width" id="KvA-XI-IEn"/>
+                    <constraint firstItem="PUe-Gr-nzm" firstAttribute="trailing" secondItem="Edx-5K-h4r" secondAttribute="trailing" id="Hjc-Sv-W6j"/>
                     <constraint firstItem="XCP-3F-Id1" firstAttribute="top" secondItem="edg-Gt-WFt" secondAttribute="top" id="Rue-Vt-4ri"/>
                     <constraint firstItem="PUe-Gr-nzm" firstAttribute="leading" secondItem="edg-Gt-WFt" secondAttribute="leading" constant="20" id="Zsa-uC-W69"/>
+                    <constraint firstItem="PUe-Gr-nzm" firstAttribute="top" secondItem="m9t-js-BM8" secondAttribute="bottom" constant="5" id="huW-NT-OrN"/>
                     <constraint firstAttribute="bottom" secondItem="XCP-3F-Id1" secondAttribute="bottom" id="nGS-Qm-1Gq"/>
-                    <constraint firstAttribute="bottom" secondItem="PUe-Gr-nzm" secondAttribute="bottom" constant="10" id="ndH-nC-Qgn"/>
+                    <constraint firstAttribute="bottom" secondItem="PUe-Gr-nzm" secondAttribute="bottom" constant="5" id="ndH-nC-Qgn"/>
                     <constraint firstItem="Edx-5K-h4r" firstAttribute="top" secondItem="edg-Gt-WFt" secondAttribute="top" constant="20" id="rvU-Sf-ZLo"/>
                     <constraint firstItem="m9t-js-BM8" firstAttribute="leading" secondItem="edg-Gt-WFt" secondAttribute="leading" constant="20" id="xL4-hs-2Ly"/>
                     <constraint firstAttribute="trailing" secondItem="Edx-5K-h4r" secondAttribute="trailing" constant="20" id="zKg-ox-LnL"/>

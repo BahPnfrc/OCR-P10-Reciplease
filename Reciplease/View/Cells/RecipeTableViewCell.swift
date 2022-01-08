@@ -28,12 +28,11 @@ class RecipeTableViewCell: UITableViewCell {
         timerLabel.textColor = .white
 
         let gradient = CAGradientLayer()
-        gradient.type = .axial
         gradient.colors = [
-            UIColor(red: 0, green: 0, blue: 0, alpha: 0),
-            UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+            UIColor.clear.cgColor,
+            UIColor.black.withAlphaComponent(1).cgColor
         ]
-        gradient.locations = [0.5, 0.8]
+        gradient.locations = [0.5, 1.0]
         gradient.frame = backgroundImageView.bounds
         backgroundImageView.layer.addSublayer(gradient)
     }

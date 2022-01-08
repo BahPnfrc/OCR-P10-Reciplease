@@ -1,10 +1,19 @@
 import Foundation
 import Alamofire
 
-class NetworkController {
+class RecipeSession {
 
-    static let shared = NetworkController()
+    static let shared = RecipeSession()
     private init() {}
+
+    private var recipeSession = URLSession(configuration: .default)
+    private var imageSession = URLSession(configuration: .default)
+    init(recipeSession: URLSession) {
+        self.recipeSession = recipeSession
+    }
+    init(imageSession: URLSession) {
+        self.imageSession = imageSession
+    }
 
     // MARK: - Parameters
 
@@ -97,9 +106,7 @@ class NetworkController {
     func getPicture(
         fromURL url: String?,
         completion: @escaping(Swift.Result<UIImage, ApiError>) -> Void) {
-
             guard let url = url else { return }
-
             Alamofire.request(url).response { (result) in
                 guard result.error == nil, let data = result.data else {
                     completion(.failure(.server))

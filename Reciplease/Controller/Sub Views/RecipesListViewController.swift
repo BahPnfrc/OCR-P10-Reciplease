@@ -8,7 +8,7 @@ class RecipesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        paint()
+//        paint()
         recipesTableView.dataSource = self
         recipesTableView.delegate = self
 
@@ -23,9 +23,19 @@ class RecipesListViewController: UIViewController {
     private func paint() {
         // navigation
         if let nc = navigationController {
-            nc.navigationBar.backgroundColor = Painting.colorBrown
+            if #available(iOS 15.0, *) {
+                let appearance = UINavigationBarAppearance()
+                appearance.configureWithOpaqueBackground()
+                appearance.backgroundColor = Painting.colorBrown
+                nc.navigationBar.standardAppearance = appearance
+                UINavigationBar.appearance().scrollEdgeAppearance = appearance
+            } else {
+                nc.navigationBar.backgroundColor = Painting.colorBrown
+                nc.navigationBar.tintColor = Painting.colorWhite
+            }
             nc.navigationBar.titleTextAttributes = [.foregroundColor: Painting.colorWhite]
-            nc.navigationBar.tintColor = Painting.colorWhite
+
+            self.navigationController?.navigationBar.tintColor = Painting.colorWhite
         }
     }
 }
@@ -43,10 +53,10 @@ extension RecipesListViewController: UITableViewDataSource {
 
         cell.titleLabel.text = recipe.label
         cell.ingredientsLabel.text = recipe.ingredientLines?.joined(separator: ", ")
-        cell.timerLabel.text = getRecipeTime(from: recipe.totalTime)
-        cell.markLabel.text = getRecipeScore(from: recipe.yield)
+        cell.timerLabel.text = recipe.getTime()
+        cell.markLabel.text = recipe.getScore()
 
-        NetworkController.shared.getPicture(fromURL: recipe.image) { result in
+        RecipeSession.shared.getPicture(fromURL: recipe.image) { result in
             switch result {
             case .failure:
                 cell.backgroundImageView.image = UIImage()
@@ -57,40 +67,13 @@ extension RecipesListViewController: UITableViewDataSource {
         return cell
     }
 
-    private func getRecipeTime(from time: Int64?) -> String {
-        guard var time = time else { return "⎯" }
-        if time == 0 { return "⎯" }
-        if time < 60 { return "\(time)min" }
-        var result = 0
-        while time >= 60 {
-            time -= 60
-            result += 1
-        }
-        return "\(result)h"
-    }
-
-    private func getRecipeScore(from score: Int64?) -> String {
-        guard let score = score else { return "⎯"}
-        var result = Double(score)
-        let units = ["", "k", "M", "Md"]
-        var index = 0
-        while result >= 1000 {
-            result /= 1000
-            index += 1
-        }
-        return "\(result.toString(1))\(units[index])"
-
-    }
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let recipe = dataSource[indexPath.row]
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "recipeViewController") as! RecipeViewController
 
         vc.currentRecipe = recipe
-//        vc.modalPresentationStyle = .fullScreen
         vc.title = "Recipe"
-
         navigationController?.pushViewController(vc, animated: true)
     }
 }

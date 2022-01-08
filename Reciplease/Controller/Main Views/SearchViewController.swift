@@ -89,7 +89,7 @@ class SearchViewController: UIViewController {
         #endif
 
         guard datasource.count > 0 else { return }
-        NetworkController.shared.getRecipes(madeWith: datasource) { result in
+        RecipeSession.shared.getRecipes(madeWith: datasource) { result in
             switch result {
             case .failure(let error):
                 print("🔴 KO")
