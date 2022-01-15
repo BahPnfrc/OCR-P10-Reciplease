@@ -32,7 +32,7 @@ class RecipeTableViewCell: UITableViewCell {
             UIColor.clear.cgColor,
             UIColor.black.withAlphaComponent(1).cgColor
         ]
-        gradient.locations = [0.5, 1.0]
+        gradient.locations = [0.6, 1.0]
         gradient.frame = backgroundImageView.bounds
         backgroundImageView.layer.addSublayer(gradient)
     }

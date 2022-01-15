@@ -1,6 +1,6 @@
 import UIKit
 
-class SearchViewController: UIViewController {
+class SearchViewController: GlobalViewController {
 
     @IBOutlet weak var ingredientsSearchBar: UISearchBar!
     @IBOutlet weak var ingredientsTableView: UITableView!
@@ -15,6 +15,7 @@ class SearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboardWhenTappedAround()
         ingredientsSearchBar.delegate = self
         ingredientsTableView.delegate = self
         ingredientsTableView.dataSource = self
@@ -89,7 +90,10 @@ class SearchViewController: UIViewController {
         #endif
 
         guard datasource.count > 0 else { return }
-        RecipeSession.shared.getRecipes(madeWith: datasource) { result in
+        isRequesting = true
+        RecipeSession.shared.getRecipes(madeWith: datasource) { [weak self] result in
+            self?.isRequesting = false
+            guard let self = self else { return }
             switch result {
             case .failure(let error):
                 print("🔴 KO")

@@ -2,7 +2,23 @@ import Foundation
 
 // MARK: - Recipe Data
 struct RecipeData: Decodable {
+    let links: Links?
     let hits: [Hit]?
+
+    enum CodingKeys: String, CodingKey {
+        case hits
+        case links = "_links"
+    }
+}
+
+// MARK: - Next
+struct Links: Decodable {
+    let next: Next?
+}
+
+// MARK: - Next
+struct Next: Decodable {
+    let href: String?
 }
 
 // MARK: - Hit

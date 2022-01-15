@@ -1,9 +1,10 @@
 import UIKit
 
-class RecipesListViewController: UIViewController {
+class RecipesListViewController: GlobalViewController {
 
     @IBOutlet weak var recipesTableView: UITableView!
     var dataSource = [Recipe]()
+    var nextRecipesRequest: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +41,7 @@ class RecipesListViewController: UIViewController {
     }
 }
 
-extension RecipesListViewController: UITableViewDelegate { }
+extension RecipesListViewController: UITableViewDelegate {}
 
 extension RecipesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -56,7 +57,9 @@ extension RecipesListViewController: UITableViewDataSource {
         cell.timerLabel.text = recipe.getTime()
         cell.markLabel.text = recipe.getScore()
 
-        RecipeSession.shared.getPicture(fromURL: recipe.image) { result in
+
+        RecipeSession.shared.getPicture(fromURL: recipe.image) { [weak self] result in
+            guard self != nil else { return }
             switch result {
             case .failure:
                 cell.backgroundImageView.image = UIImage()
@@ -75,5 +78,31 @@ extension RecipesListViewController: UITableViewDataSource {
         vc.currentRecipe = recipe
         vc.title = "Recipe"
         navigationController?.pushViewController(vc, animated: true)
+    }
+
+    private func isLastCell(indexPath: IndexPath) -> Bool {
+        return indexPath.row == dataSource.count - 1
+    }
+
+    internal func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if isLastCell(indexPath: indexPath) {
+            loadNextRecipes()
+        }
+    }
+
+    private func loadNextRecipes() -> Void {
+        isRequesting = true
+        RecipeSession.shared.getNextRecipes() { [weak self] result in
+            self?.isRequesting = false
+            guard let self = self else { return }
+
+            switch result{
+            case .failure(let error):
+                print(error)
+            case .success(let recipes):
+                recipes.forEach({ self.dataSource.append($0) })
+                self.recipesTableView.reloadData()
+            }
+        }
     }
 }

@@ -63,7 +63,7 @@ class RecipeViewController: UIViewController {
             UIColor.clear.cgColor,
             UIColor.black.withAlphaComponent(1).cgColor
         ]
-        gradient.locations = [0.3, 1.0]
+        gradient.locations = [0.5, 1.0]
         gradient.frame = recipeImage.bounds
         recipeImage.layer.addSublayer(gradient)
 

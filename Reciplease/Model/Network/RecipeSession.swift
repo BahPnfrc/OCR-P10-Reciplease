@@ -3,6 +3,12 @@ import Alamofire
 
 class RecipeSession {
 
+    var nextHref: String? {
+        didSet {
+            print(nextHref)
+        }
+    }
+
     static let shared = RecipeSession()
     private init() {}
 
@@ -87,10 +93,45 @@ class RecipeSession {
                             if let recipe = hit.recipe { recipes.append(recipe)}
                         }
                     }
+                    self.nextHref = recipeData.links?.next?.href
                     completion(.success(recipes))
                 }
             }
         }
+
+    func getNextRecipes(completion: @escaping (Swift.Result<[Recipe], ApiError>) -> Void) {
+        guard let href = self.nextHref else {
+            completion(.failure(.other(error: "No previous Href")))
+            return
+        }
+
+        guard let url = URL(string: href) else {
+            completion(.failure(.url))
+            return
+        }
+
+        let urlRequest = URLRequest(url: url)
+        getResponse(fromRequest: urlRequest) { result in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let string):
+                guard let data = string.data(using: .utf8),
+                      let recipeData = try? JSONDecoder().decode(RecipeData.self, from: data) else {
+                          completion(.failure(.decoding))
+                          return
+                      }
+                var recipes = [Recipe]()
+                if let hits = recipeData.hits {
+                    for hit in hits {
+                        if let recipe = hit.recipe { recipes.append(recipe)}
+                    }
+                }
+                self.nextHref = recipeData.links?.next?.href
+                completion(.success(recipes))
+            }
+        }
+    }
 
     private func getResponse(
         fromRequest request:URLRequest,

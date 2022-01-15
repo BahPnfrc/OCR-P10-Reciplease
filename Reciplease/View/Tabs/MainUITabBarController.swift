@@ -64,7 +64,6 @@ class MainUITabBarController: UITabBarController {
         let firstTab = tabBarItems[0]
         firstTab.image = nil
         firstTab.title = "Search"
-
         let secondTab = tabBarItems[1]
         secondTab.image = nil
         secondTab.title = "Favorite"
