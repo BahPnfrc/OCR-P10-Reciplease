@@ -25,4 +25,8 @@ class FavoriteListViewController: RecipesListViewController {
         }
     }
 
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        return
+    }
+
 }

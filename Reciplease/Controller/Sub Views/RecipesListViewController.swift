@@ -9,7 +9,7 @@ class RecipesListViewController: GlobalViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        paint()
+//      paint()
         recipesTableView.dataSource = self
         recipesTableView.delegate = self
 
@@ -56,7 +56,6 @@ extension RecipesListViewController: UITableViewDataSource {
         cell.ingredientsLabel.text = recipe.ingredientLines?.joined(separator: ", ")
         cell.timerLabel.text = recipe.getTime()
         cell.markLabel.text = recipe.getScore()
-
 
         RecipeSession.shared.getPicture(fromURL: recipe.image) { [weak self] result in
             guard self != nil else { return }
