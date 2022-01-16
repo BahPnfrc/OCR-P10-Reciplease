@@ -1,16 +1,20 @@
 PODS:
-  - Alamofire (4.9.1)
+  - Alamofire (5.5.0)
+  - Mocker (2.5.5)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.4)
+  - Alamofire (~> 5.5)
+  - Mocker (~> 2.5)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
+    - Mocker
 
 SPEC CHECKSUMS:
-  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  Mocker: 8c731a8104962f246cadf2b02556218e9edc1390
 
-PODFILE CHECKSUM: aef78a757e407bb2fcc63affa8b49319ea94bfa5
+PODFILE CHECKSUM: 7e4ea37cbcb434d8220ae248b22e735d7222b904
 
 COCOAPODS: 1.11.2

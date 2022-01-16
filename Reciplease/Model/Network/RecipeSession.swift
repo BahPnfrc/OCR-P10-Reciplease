@@ -5,97 +5,67 @@ class RecipeSession {
 
     var nextHref: String? {
         didSet {
-            print(nextHref)
+            print(nextHref ?? "No \(String.init(describing: self))")
         }
     }
 
     static let shared = RecipeSession()
     private init() {}
 
-    private var recipeSession = URLSession(configuration: .default)
-    private var imageSession = URLSession(configuration: .default)
-    init(recipeSession: URLSession) {
-        self.recipeSession = recipeSession
-    }
-    init(imageSession: URLSession) {
-        self.imageSession = imageSession
-    }
+    private var recipeSession = URLSession.shared.configuration
+    private var imageSession = URLSession.shared.configuration
+    private var recipeNextSession = URLSession.shared.configuration
 
     // MARK: - Parameters
 
     /// More : https://developer.edamam.com/edamam-docs-recipe-api
     private let baseURL = "https://api.edamam.com/api/recipes/v2"
 
-    /// Pass this items's raw values to build a valid URL
-    private enum UrlQueryItems: String {
-        case type
-        case input = "q"
-        case idToken = "app_id"
-        case keyToken = "app_key"
+    struct Params: Codable {
+        let type: String
+        let input: String
+        let idToken: String
+        let keyToken: String
 
-        /// Pass this values as default values for items
-        var defaultValue: String? {
-            switch self {
-            case .type: return "public"
-            case .input: return nil
-            case .idToken: return Token.app_id
-            case .keyToken: return Token.app_key
-            }
+        enum CodingKeys: String, CodingKey {
+            case type
+            case input = "q"
+            case idToken = "app_id"
+            case keyToken = "app_key"
         }
     }
 
-    struct Params: Encodable {
-        let type: String
-        let q: String
-        let app_id: String
-        let app_key: String
-    }
-
     func getRecipes(
-        /// - parameter ingredients: an array of ingredients
-        /// - returns :
         madeWith ingredients: [String],
         completion: @escaping (Swift.Result<[Recipe], ApiError>) -> Void) {
 
-            guard var urlComponents = URLComponents(string: baseURL) else {
-                completion(.failure(.url))
-                return
-            }
+            let params = Params(
+                type: "public",
+                input: ingredients.joined(separator: ","),
+                idToken: Token.app_id,
+                keyToken: Token.app_key)
 
-            urlComponents.queryItems = [
-                URLQueryItem(name: UrlQueryItems.type.rawValue, value: UrlQueryItems.type.defaultValue),
-                URLQueryItem(name: UrlQueryItems.input.rawValue, value: ingredients.joined(separator: ",")),
-                URLQueryItem(name: UrlQueryItems.idToken.rawValue, value: UrlQueryItems.idToken.defaultValue),
-                URLQueryItem(name: UrlQueryItems.keyToken.rawValue, value: UrlQueryItems.keyToken.defaultValue)
-            ]
+            AF.request(baseURL, method: .get, parameters: params).response { response in
+                guard response.response?.statusCode == 200,
+                      response.error == nil,
+                      let data = response.data else {
+                          completion(.failure(.server))
+                          return
+                      }
 
-            guard let components = urlComponents.string, let url = URL(string: components) else {
-                completion(.failure(.query))
-                return
-            }
+                guard let recipeData = try? JSONDecoder().decode(RecipeData.self, from: data) else {
+                          completion(.failure(.decoding))
+                          return
+                      }
 
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
-
-            getResponse(fromRequest: request) { result in
-                switch result {
-                case .failure(let error):
-                    print(error)
-                case .success(let string):
-                    guard let data = string.data(using: .utf8),
-                          let recipeData = try? JSONDecoder().decode(RecipeData.self, from: data) else {
-                              completion(.failure(.decoding))
-                              return
-                          }
-                    var recipes = [Recipe]()
-                    if let hits = recipeData.hits {
-                        for hit in hits {
-                            if let recipe = hit.recipe { recipes.append(recipe)}
-                        }
+                var recipes = [Recipe]()
+                if let hits = recipeData.hits {
+                    for hit in hits {
+                        if let recipe = hit.recipe { recipes.append(recipe)}
                     }
-                    self.nextHref = recipeData.links?.next?.href
-                    completion(.success(recipes))
                 }
+                self.nextHref = recipeData.links?.next?.href ?? nil
+                completion(.success(recipes))
             }
         }
 
@@ -105,51 +75,41 @@ class RecipeSession {
             return
         }
 
-        guard let url = URL(string: href) else {
-            completion(.failure(.url))
-            return
-        }
+        self.nextHref = nil
+        AF.request(href, method: .get).response { response in
+            guard response.response?.statusCode == 200,
+                  response.error == nil,
+                  let data = response.data else {
+                      completion(.failure(.server))
+                      return
+                  }
 
-        let urlRequest = URLRequest(url: url)
-        getResponse(fromRequest: urlRequest) { result in
-            switch result {
-            case .failure(let error):
-                print(error)
-            case .success(let string):
-                guard let data = string.data(using: .utf8),
-                      let recipeData = try? JSONDecoder().decode(RecipeData.self, from: data) else {
-                          completion(.failure(.decoding))
-                          return
-                      }
-                var recipes = [Recipe]()
-                if let hits = recipeData.hits {
-                    for hit in hits {
-                        if let recipe = hit.recipe { recipes.append(recipe)}
-                    }
+            guard let recipeData = try? JSONDecoder().decode(RecipeData.self, from: data) else {
+                      completion(.failure(.decoding))
+                      return
+                  }
+
+            var recipes = [Recipe]()
+            if let hits = recipeData.hits {
+                for hit in hits {
+                    if let recipe = hit.recipe { recipes.append(recipe)}
                 }
-                self.nextHref = recipeData.links?.next?.href
-                completion(.success(recipes))
             }
+
+            self.nextHref = recipeData.links?.next?.href
+            completion(.success(recipes))
+
         }
     }
-
-    private func getResponse(
-        fromRequest request:URLRequest,
-        completion: @escaping (Swift.Result<String, ApiError>) -> Void) {
-            Alamofire.request(request.description).responseString { response in
-                if let JSON = response.result.value {
-                    completion(.success(JSON))
-                }
-                completion(.failure(.server))
-            }
-        }
 
     func getPicture(
         fromURL url: String?,
         completion: @escaping(Swift.Result<UIImage, ApiError>) -> Void) {
             guard let url = url else { return }
-            Alamofire.request(url).response { (result) in
-                guard result.error == nil, let data = result.data else {
+            AF.request(url, method: .get).response { response in
+                guard response.response?.statusCode == 200,
+                    response.error == nil,
+                    let data = response.data else {
                     completion(.failure(.server))
                     return
                 }

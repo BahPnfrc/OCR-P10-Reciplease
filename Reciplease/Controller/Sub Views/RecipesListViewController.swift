@@ -80,11 +80,15 @@ extension RecipesListViewController: UITableViewDataSource {
     }
 
     private func isLastCell(indexPath: IndexPath) -> Bool {
-        return indexPath.row == dataSource.count - 1
+        let isLastCell = indexPath.row == dataSource.count - 1
+        return isLastCell
     }
 
     internal func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if isLastCell(indexPath: indexPath) {
+            guard RecipeSession.shared.nextHref != nil else {
+                return
+            }
             loadNextRecipes()
         }
     }
