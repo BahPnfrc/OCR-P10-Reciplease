@@ -61,7 +61,8 @@ extension RecipesListViewController: UITableViewDataSource {
             guard self != nil else { return }
             switch result {
             case .failure:
-                cell.backgroundImageView.image = UIImage()
+                cell.backgroundImageView.image = UIImage().withTintColor(UIColor.white)
+                cell.logoImageView.isHidden = false
             case .success(let image):
                 cell.backgroundImageView.image = image
             }
@@ -86,16 +87,14 @@ extension RecipesListViewController: UITableViewDataSource {
 
     internal func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if isLastCell(indexPath: indexPath) {
-            guard RecipeSession.shared.nextHref != nil else {
-                return
-            }
             loadNextRecipes()
         }
     }
 
     private func loadNextRecipes() -> Void {
+        guard let href = RecipeSession.nextHref else { return }
         isRequesting = true
-        RecipeSession.shared.getNextRecipes() { [weak self] result in
+        RecipeSession.shared.getNextRecipes(nextHref: href) { [weak self] result in
             self?.isRequesting = false
             guard let self = self else { return }
 

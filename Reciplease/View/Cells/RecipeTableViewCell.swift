@@ -8,6 +8,7 @@ class RecipeTableViewCell: UITableViewCell {
 
     @IBOutlet weak var topRightCornerView: UIView!
 
+    @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var markLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
 
@@ -26,6 +27,7 @@ class RecipeTableViewCell: UITableViewCell {
         topRightCornerView.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
         markLabel.textColor = .white
         timerLabel.textColor = .white
+        logoImageView.isHidden = true
 
         let gradient = CAGradientLayer()
         gradient.colors = [

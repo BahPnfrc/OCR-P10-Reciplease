@@ -90,12 +90,20 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="128" translatesAutoresizingMaskIntoConstraints="NO" id="iI1-Ft-aI1">
+                        <rect key="frame" x="175" y="26.5" width="64" height="64"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="iI1-Ft-aI1" secondAttribute="height" id="5YF-Kz-VSf"/>
+                            <constraint firstAttribute="width" constant="64" id="QXJ-uB-svl"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="XCP-3F-Id1" firstAttribute="leading" secondItem="edg-Gt-WFt" secondAttribute="leading" id="3uQ-mK-gJa"/>
                     <constraint firstItem="m9t-js-BM8" firstAttribute="trailing" secondItem="Edx-5K-h4r" secondAttribute="trailing" id="AXA-44-btj"/>
                     <constraint firstAttribute="trailing" secondItem="XCP-3F-Id1" secondAttribute="trailing" id="CYx-oU-aIN"/>
                     <constraint firstItem="PUe-Gr-nzm" firstAttribute="trailing" secondItem="Edx-5K-h4r" secondAttribute="trailing" id="Hjc-Sv-W6j"/>
+                    <constraint firstItem="iI1-Ft-aI1" firstAttribute="centerY" secondItem="XCP-3F-Id1" secondAttribute="centerY" multiplier="0.8" id="NtL-Jr-SBE"/>
                     <constraint firstItem="XCP-3F-Id1" firstAttribute="top" secondItem="edg-Gt-WFt" secondAttribute="top" id="Rue-Vt-4ri"/>
                     <constraint firstItem="PUe-Gr-nzm" firstAttribute="leading" secondItem="edg-Gt-WFt" secondAttribute="leading" constant="20" id="Zsa-uC-W69"/>
                     <constraint firstItem="PUe-Gr-nzm" firstAttribute="top" secondItem="m9t-js-BM8" secondAttribute="bottom" constant="5" id="huW-NT-OrN"/>
@@ -103,12 +111,14 @@
                     <constraint firstAttribute="bottom" secondItem="PUe-Gr-nzm" secondAttribute="bottom" constant="5" id="ndH-nC-Qgn"/>
                     <constraint firstItem="Edx-5K-h4r" firstAttribute="top" secondItem="edg-Gt-WFt" secondAttribute="top" constant="20" id="rvU-Sf-ZLo"/>
                     <constraint firstItem="m9t-js-BM8" firstAttribute="leading" secondItem="edg-Gt-WFt" secondAttribute="leading" constant="20" id="xL4-hs-2Ly"/>
+                    <constraint firstItem="iI1-Ft-aI1" firstAttribute="centerX" secondItem="XCP-3F-Id1" secondAttribute="centerX" id="xkm-6P-75z"/>
                     <constraint firstAttribute="trailing" secondItem="Edx-5K-h4r" secondAttribute="trailing" constant="20" id="zKg-ox-LnL"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="backgroundImageView" destination="XCP-3F-Id1" id="aRw-HR-FaI"/>
                 <outlet property="ingredientsLabel" destination="PUe-Gr-nzm" id="A4R-YY-ycy"/>
+                <outlet property="logoImageView" destination="iI1-Ft-aI1" id="Wtt-Ca-D9E"/>
                 <outlet property="markLabel" destination="vL3-lz-osG" id="2UQ-LJ-G6e"/>
                 <outlet property="timerLabel" destination="4rc-2e-LE7" id="0QG-16-L4n"/>
                 <outlet property="titleLabel" destination="m9t-js-BM8" id="WTt-qH-Oli"/>
@@ -116,10 +126,11 @@
                 <outlet property="totalTimeImageView" destination="bAf-CO-ahY" id="zG5-9Y-Fyt"/>
                 <outlet property="yieldImageView" destination="c2X-us-2Iv" id="stj-Qw-CWx"/>
             </connections>
-            <point key="canvasLocation" x="-814.49275362318849" y="-62.946428571428569"/>
+            <point key="canvasLocation" x="-759.4202898550725" y="-46.875"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="128" width="128" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

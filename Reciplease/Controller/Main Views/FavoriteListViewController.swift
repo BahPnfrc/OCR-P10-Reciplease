@@ -4,6 +4,7 @@ class FavoriteListViewController: RecipesListViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        recipesTableView.backgroundColor = UIColor.white.withAlphaComponent(0)
     }
 
     override func viewWillAppear(_ animated: Bool) {
