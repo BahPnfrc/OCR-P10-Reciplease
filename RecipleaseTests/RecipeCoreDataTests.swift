@@ -1,49 +1,67 @@
 import XCTest
 import Foundation
+import CoreData
 @testable import Reciplease
 
 class RecipeCoreDataTests: XCTestCase {
 
-    func getCoreDataElements() -> Int {
-        return try! CoreDataController.shared.get().count
-    }
-    func getNewTestRecipe() -> Recipe {
-        return Recipe(label: "testRecipeLabel + \(Int.random(in: 0...100))", image: "testRecipeImage", url: "testRecipeUrl", yield: 1, ingredientLines: ["testRecipeIngredient"], totalTime: 1)
+    // MARK: - CoreData
+    var controller: CoreDataController!
+
+    // MARK: - Object
+
+    var randomRecipe: Recipe = {
+        return Recipe(
+            label: randomString(),
+            image: randomString(),
+            url: randomString(),
+            yield: randomInt(),
+            ingredientLines: randomArray(),
+            totalTime: randomInt())
+    }()
+
+    private static func randomString(_ length: Int = 10) -> String {
+      let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+      return String((0..<length).map{ _ in letters.randomElement()! })
     }
 
+    private static func randomArray(_ lines: Int = 3) -> [String] {
+        var array = [String]()
+        for _ in 0...abs(lines) - 1 { array.append(randomString()) }
+        return array
+    }
+
+    private static func randomInt(_ from: Int64 = 1, _ to: Int64 = 1000) -> Int64 {
+        return Int64.random(in: from..<to)
+    }
+
+    // MARK: - Initializing
+
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        controller = CoreDataController(.inMemory)
     }
 
     override func tearDownWithError() throws {
-        let recipes = try CoreDataController.shared.get(recipeNamed: "testRecipeLabel", ascending: true)
-        for recipe in recipes {
-            try CoreDataController.shared.delete(recipe)
-        }
+        try super.tearDownWithError()
+        controller = nil
     }
+
+    // MARK: - Tests
 
     func testGivenAnyNumberOfSavedRecipes_whenSavingAnother_thenThisNumberGrowByOne() throws {
-        let beforeRecipeCount = getCoreDataElements()
-        let testRecipe = getNewTestRecipe()
-        try CoreDataController.shared.add(testRecipe)
-        let afterRecipeCount = getCoreDataElements()
-        XCTAssert(afterRecipeCount == beforeRecipeCount + 1)
-    }
-
-    func testGivenAnyNumberOfSavedRecipes_whenSavingAndDeletingANother_thenNumberIsEqual() throws {
-        let beforeRecipeCount = getCoreDataElements()
-        let testRecipe = getNewTestRecipe()
-        try CoreDataController.shared.add(testRecipe)
-        try CoreDataController.shared.delete(testRecipe)
-        let afterRecipeCount = getCoreDataElements()
-        XCTAssert(afterRecipeCount == beforeRecipeCount)
+        let recipe = randomRecipe
+        try controller.add(recipe)
+        let result = try? controller.get()
+        let savedRecipe = result?.first
+        XCTAssertEqual(result?.count, 1)
+        XCTAssertTrue(savedRecipe == recipe)
     }
 
     func testGivenRecipeIsNotSaved_whenSavingRecipe_thenRecipeIsFavorite() throws {
-        let testRecipe = getNewTestRecipe()
-        XCTAssertFalse(CoreDataController.shared.isFavorite(testRecipe))
-        try CoreDataController.shared.add(testRecipe)
-        XCTAssertTrue(CoreDataController.shared.isFavorite(testRecipe))
+        let testRecipe = randomRecipe
+        try controller.add(testRecipe)
+        XCTAssertTrue(controller.isFavorite(testRecipe))
     }
 
 }

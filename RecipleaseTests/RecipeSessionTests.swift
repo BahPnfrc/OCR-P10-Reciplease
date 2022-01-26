@@ -140,10 +140,8 @@ class RecipeSessionTests: XCTestCase {
     func testGivenValidData_whenRequestingNextRecipe_thenRecipeArrayIsReturned() {
 
         let mock = Mock(
-            url: MockedData.recipeNextDataURL,
-            ignoreQuery: true,
-            dataType: .json,
-            statusCode: 200,
+            url: MockedData.recipeNextDataURL, ignoreQuery: true,
+            dataType: .json, statusCode: 200,
             data: [.get: MockedData.recipeNextDataOK])
         mock.register()
 

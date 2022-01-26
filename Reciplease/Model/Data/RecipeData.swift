@@ -48,8 +48,9 @@ extension Recipe {
         favorite.yield             = self.yield ?? 1
         return favorite
     }
-
 }
+
+extension Recipe: Equatable {}
 
 extension Recipe {
     func getTime() -> String {

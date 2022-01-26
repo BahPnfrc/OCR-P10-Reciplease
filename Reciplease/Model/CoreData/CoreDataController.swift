@@ -6,22 +6,14 @@ class CoreDataController {
     static let shared = CoreDataController()
     private init() {}
 
-    private let context = AppDelegate.viewContext
+    private var stack = CoreDataStack.init(.persistent)
 
-    private func saveContext() throws -> Void {
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                throw error
-            }
-        }
+    init(_ storageType: CoreDataStack.StorageType) {
+        self.stack = CoreDataStack.init(storageType)
     }
-}
-
-extension CoreDataController {
 
     func add(_ recipe: Recipe) throws -> Void {
+        let context = stack.context
         let newRecipe = RecipeFavorite(context: context)
         newRecipe.image             = recipe.image
         newRecipe.ingredientLines   = recipe.ingredientLines
@@ -30,7 +22,7 @@ extension CoreDataController {
         newRecipe.totalTime         = recipe.totalTime ?? 1
         newRecipe.url               = recipe.url
         newRecipe.yield             = recipe.yield ?? 0
-        try? saveContext()
+        try? stack.saveContext()
     }
 
     func get(
@@ -44,7 +36,7 @@ extension CoreDataController {
                 NSSortDescriptor(key: "timestamp", ascending: ascending)
             ]
             do {
-                return try context.fetch(request).map( {$0.toRecipe() })
+                return try stack.context.fetch(request).map( {$0.toRecipe() })
             } catch {
                 throw error
             }
@@ -54,7 +46,7 @@ extension CoreDataController {
         guard let url = recipe.url else { return false }
         let request = RecipeFavorite.fetchRequest()
         request.predicate = NSPredicate(format: "url == %@", "\(url)")
-        guard let recipes = try? context.fetch(request) else { return false }
+        guard let recipes = try? stack.context.fetch(request) else { return false }
         return !recipes.isEmpty
     }
 
@@ -63,9 +55,9 @@ extension CoreDataController {
         if let url = recipe.url {
             request.predicate = NSPredicate(format: "url = %@", "\(url)")
             do {
-                let result = try context.fetch(request)
-                for object in result { context.delete(object)}
-                try? saveContext()
+                let result = try stack.context.fetch(request)
+                for object in result { stack.context.delete(object)}
+                try? stack.saveContext()
             } catch {
                 throw error
             }
