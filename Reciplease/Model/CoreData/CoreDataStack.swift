@@ -1,11 +1,15 @@
 import Foundation
 import CoreData
 
-open class CoreDataStack {
+public enum CoreDataStorage {
+  case persistent, inMemory
+}
 
-    public enum StorageType {
-      case persistent, inMemory
-    }
+public enum CoreDataError: Error {
+    case saving
+}
+
+open class CoreDataStack {
 
     // MARK: - Variable
 
@@ -13,7 +17,7 @@ open class CoreDataStack {
 
     // MARK: - Initializer
 
-    public init(_ storageType: StorageType = .persistent) {
+    public init(_ storageType: CoreDataStorage = .persistent) {
         self.persistentContainer = NSPersistentContainer(name: "Reciplease")
         if storageType == .inMemory {
             let description = NSPersistentStoreDescription()
@@ -39,6 +43,7 @@ open class CoreDataStack {
             try context.save()
         } catch let error as NSError {
             print("Unresolved error \(error), \(error.userInfo)")
+            throw CoreDataError.saving
         }
     }
 }

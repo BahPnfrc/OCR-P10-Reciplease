@@ -34,7 +34,6 @@
 		52C53C83278DF631004586F6 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C53C82278DF631004586F6 /* UINavigationController+Extension.swift */; };
 		52C53C85278DF71F004586F6 /* GlobalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C53C84278DF71F004586F6 /* GlobalViewController.swift */; };
 		52C53C87278EDE99004586F6 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C53C86278EDE99004586F6 /* UIViewController+Extension.swift */; };
-		52D5F95227A06104006356F7 /* CoreDataTestContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D5F95127A06104006356F7 /* CoreDataTestContainer.swift */; };
 		52D5F95E27A19DC9006356F7 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D5F95D27A19DC9006356F7 /* CoreDataStack.swift */; };
 		52DEEA4C275D3DD400548415 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DEEA4B275D3DD400548415 /* AppDelegate.swift */; };
 		52DEEA4E275D3DD400548415 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DEEA4D275D3DD400548415 /* SceneDelegate.swift */; };
@@ -89,7 +88,6 @@
 		52C53C82278DF631004586F6 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
 		52C53C84278DF71F004586F6 /* GlobalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalViewController.swift; sourceTree = "<group>"; };
 		52C53C86278EDE99004586F6 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
-		52D5F95127A06104006356F7 /* CoreDataTestContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTestContainer.swift; sourceTree = "<group>"; };
 		52D5F95D27A19DC9006356F7 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		52DEEA48275D3DD400548415 /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52DEEA4B275D3DD400548415 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -222,12 +220,15 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		52D5F95327A0625E006356F7 /* CoreData */ = {
+		52B6A73D27A2A34600C84589 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				52D5F95127A06104006356F7 /* CoreDataTestContainer.swift */,
+				524412D6279425C700BB3411 /* MockedData.swift */,
+				520E715F2765147A00D8777A /* RecipeData.json */,
+				524412D92794294300BB3411 /* RecipeNextData.json */,
+				5263627427873C8B003118D4 /* RecipeImage.jpeg */,
 			);
-			path = CoreData;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		52DEEA3F275D3DD400548415 = {
@@ -266,11 +267,7 @@
 		52DEEA64275D3DD500548415 /* RecipleaseTests */ = {
 			isa = PBXGroup;
 			children = (
-				52D5F95327A0625E006356F7 /* CoreData */,
-				524412D6279425C700BB3411 /* MockedData.swift */,
-				520E715F2765147A00D8777A /* RecipeData.json */,
-				524412D92794294300BB3411 /* RecipeNextData.json */,
-				5263627427873C8B003118D4 /* RecipeImage.jpeg */,
+				52B6A73D27A2A34600C84589 /* Data */,
 				52DEEA65275D3DD500548415 /* RecipeSessionTests.swift */,
 				5263627627883ED0003118D4 /* RecipeCoreDataTests.swift */,
 			);
@@ -532,7 +529,6 @@
 				52F4565B2767CC4500B06646 /* Painting.swift in Sources */,
 				52456FCA275E4ECF00F13309 /* RecipeSession.swift in Sources */,
 				520E71592764DB9C00D8777A /* RecipeViewController.swift in Sources */,
-				52D5F95227A06104006356F7 /* CoreDataTestContainer.swift in Sources */,
 				520E715E2764F99700D8777A /* Shared.swift in Sources */,
 				523A74FA275FAD9900165607 /* CoreDataController.swift in Sources */,
 				52E1F55C276142A500D4D3CB /* SearchViewController.swift in Sources */,

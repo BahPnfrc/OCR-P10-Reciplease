@@ -8,9 +8,12 @@ class CoreDataController {
 
     private var stack = CoreDataStack.init(.persistent)
 
-    init(_ storageType: CoreDataStack.StorageType) {
+    init(_ storageType: CoreDataStorage) {
         self.stack = CoreDataStack.init(storageType)
     }
+
+    let defaultTotalTime: Int64 = 1
+    let defaultYield: Int64 = 0
 
     func add(_ recipe: Recipe) throws -> Void {
         let context = stack.context
@@ -19,10 +22,11 @@ class CoreDataController {
         newRecipe.ingredientLines   = recipe.ingredientLines
         newRecipe.label             = recipe.label
         newRecipe.timestamp         = Date()
-        newRecipe.totalTime         = recipe.totalTime ?? 1
+        newRecipe.totalTime         = recipe.totalTime ?? defaultTotalTime
         newRecipe.url               = recipe.url
-        newRecipe.yield             = recipe.yield ?? 0
-        try? stack.saveContext()
+        newRecipe.yield             = recipe.yield ?? defaultYield
+        do { try stack.saveContext() }
+        catch let error as NSError { throw error }
     }
 
     func get(
@@ -35,32 +39,23 @@ class CoreDataController {
             request.sortDescriptors = [
                 NSSortDescriptor(key: "timestamp", ascending: ascending)
             ]
-            do {
-                return try stack.context.fetch(request).map( {$0.toRecipe() })
-            } catch {
-                throw error
-            }
+            return try stack.context.fetch(request).map( {$0.toRecipe() })
         }
 
-    func isFavorite(_ recipe: Recipe) -> Bool {
+    func isFavorite(_ recipe: Recipe) throws -> Bool {
         guard let url = recipe.url else { return false }
         let request = RecipeFavorite.fetchRequest()
         request.predicate = NSPredicate(format: "url == %@", "\(url)")
-        guard let recipes = try? stack.context.fetch(request) else { return false }
-        return !recipes.isEmpty
+        return try !stack.context.fetch(request).isEmpty
     }
 
     func delete(_ recipe: Recipe) throws -> Void {
         let request = RecipeFavorite.fetchRequest()
         if let url = recipe.url {
             request.predicate = NSPredicate(format: "url = %@", "\(url)")
-            do {
-                let result = try stack.context.fetch(request)
-                for object in result { stack.context.delete(object)}
-                try? stack.saveContext()
-            } catch {
-                throw error
-            }
+            let result = try stack.context.fetch(request)
+            for object in result { stack.context.delete(object)}
+            try stack.saveContext()
         }
     }
 

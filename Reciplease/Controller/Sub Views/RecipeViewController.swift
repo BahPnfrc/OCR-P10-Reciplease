@@ -21,7 +21,11 @@ class RecipeViewController: UIViewController {
 
     func isFavorite() -> Bool {
         guard let recipe = currentRecipe else { return false }
-        return CoreDataController.shared.isFavorite(recipe)
+        do {
+            return try CoreDataController.shared.isFavorite(recipe)
+        } catch {
+            return false
+        }
     }
 
     func totalFavorites() -> Int {
